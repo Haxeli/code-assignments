@@ -1,6 +1,6 @@
 // Data
 
-const band = {
+export const band = {
 
     members: {
 
