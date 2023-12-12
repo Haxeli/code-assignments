@@ -1,0 +1,185 @@
+----------------  ASSIGNMENT 1 - Typescript  -------------------------
+
+  
+
+You have raw data in **`band`** variable, you need to write function(s) to transform the data into **`expected`** result.
+
+ 
+
+### Requirements:
+
+ 
+
+1. Using typescript for this assignment
+
+ 
+
+2. Add the missing types for the code / variables
+
+ 
+
+3. Copy all the code for `band.members.current` with no changes
+
+ 
+
+4. Copy all the code for `band.members.past` with no changes
+
+ 
+
+5. Add new prop `all` under `members`
+
+ 
+
+    5.1. `all`: type is Array of string, contains all the members' name (both current and past)
+
+ 
+
+    5.2. *Lowercase* all the members' name in `all`
+
+ 
+
+    5.3. Sort `all` by members' `age` **DESC**
+
+ 
+
+    5.4. Then sort `all` by members' `name` **ASC** (Notice: "gunter" is before "raymond" in the result)
+
+ 
+
+6. Add new prop `plays` under `expected`, type is Object.
+
+ 
+
+    6.1.  `plays` contains all the unique plays in the `bands` object.
+
+ 
+
+    6.2.  For each play, it should list all the members' name (vocals: ['sascha', 'lucia', 'raymond', 'en'])
+
+ 
+
+        6.2.1. Each member's name should be in lowercase
+
+ 
+
+    6.3. Plays order doesn't matter and member names' order doesn't matter
+
+ 
+
+```typescript
+
+// Data
+
+const band = {
+
+    members: {
+
+        current: [
+
+            {name: 'Sascha', age: 59, plays: ['vocals', 'synth', 'guitar', 'bass']},
+
+            {name: 'Lucia', age: 49, plays: ['vocals', 'synth']},
+
+            {name: 'Jules', age: 53, plays: ['guitar', 'bass', 'synth']},
+
+            {name: 'Steve', age: 55, plays: ['guitar']}
+
+        ],
+
+        past: [
+
+            {name: 'Raymond', age: 57, plays: ['vocals', 'synth']},
+
+            {name: 'En', age: 52, plays: ['vocals', 'drums', 'guitar', 'synth']},
+
+            {name: 'Gunter', age: 57, plays: ['guitar', 'synth']}
+
+        ]
+
+    }
+
+};
+
+ 
+
+const expected = {
+
+  members: {
+
+    // current: no changes
+
+    current: [
+
+      {name: 'Sascha', age: 59, plays: ['vocals', 'synth', 'guitar', 'bass']},
+
+      {name: 'Lucia', age: 49, plays: ['vocals', 'synth']},
+
+      {name: 'Jules', age: 53, plays: ['guitar', 'bass', 'synth']},
+
+      {name: 'Steve', age: 55, plays: ['guitar']}
+
+    ],
+
+    // past: no changes
+
+    past: [
+
+      {name: 'Raymond', age: 57, plays: ['vocals', 'synth']},
+
+      {name: 'En', age: 52, plays: ['vocals', 'drums', 'guitar', 'synth']},
+
+      {name: 'Gunter', age: 57, plays: ['guitar', 'synth']}
+
+    ],
+
+    // ORDER MATTERS!
+
+    // 1. Sort age first by DESC
+
+    // 2. then sort name by ASC
+
+    // 3. lowercase all the names
+
+    all: [
+
+      "sascha",
+
+      "gunter",
+
+      "raymond",
+
+      "steve",
+
+      "jules",
+
+      "en",
+
+      "lucia"
+
+    ]
+
+  },
+
+  // plays order doesn't matter
+
+  plays: {
+
+    // name order doesn't matter
+
+    // but show the name in lowercase
+
+    vocals: ["sascha", "lucia", "raymond", "en"],
+
+    synth: ["sascha", "lucia", "jules", "raymond", "en", "gunter"],
+
+    guitar: ["sascha", "jules", "steve", "en", "gunter"],
+
+    bass: ["sascha", "jules"],
+
+    drums: ["en"]
+
+  }
+
+}
+
+```
