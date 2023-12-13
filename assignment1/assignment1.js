@@ -1,23 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var data_1 = require("./data");
-/*
-console.log(band)
-console.log(band.members.current[0])
-console.log(band.members.past[band.members.past.length - 1])
-
-let allMembers = band.members.current.concat(band.members.past)
-for (var i = 0; i < allMembers.length; i++) {
-    console.log(allMembers[i].name.toLowerCase())
-}
-*/
 function modifyData(band) {
     var currentMembers = band.members.current.map(function (member) {
-        return member.name.toLowerCase();
+        return ("Name: " + member.name + ", Age: " + member.age + ", Plays: " + member.plays);
+    });
+    var pastMembers = band.members.past.map(function (member) {
+        return ("Name: " + member.name + ", Age: " + member.age + ", Plays: " + member.plays);
     });
     var expected = {
         members: {
-            current: currentMembers
+            current: currentMembers,
+            past: pastMembers
         }
     };
     return expected;

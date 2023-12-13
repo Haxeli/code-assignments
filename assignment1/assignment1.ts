@@ -26,12 +26,17 @@ type Member = {
 
 function modifyData(band: Band) {
     const currentMembers = band.members.current.map((member) => {
-        return member.name.toLowerCase()
+        return("Name: " + member.name + ", Age: " + member.age + ", Plays: " + member.plays)
+    })
+
+    const pastMembers = band.members.past.map((member) => {
+        return("Name: " + member.name + ", Age: " + member.age + ", Plays: " + member.plays)
     })
 
     const expected = {
         members: {
-            current: currentMembers
+            current: currentMembers,
+            past: pastMembers
         }
     }
 
