@@ -13,7 +13,7 @@ for (var i = 0; i < allMembers.length; i++) {
 */
 function modifyData(band) {
     var currentMembers = band.members.current.map(function (member) {
-        return member.name;
+        return member.name.toLowerCase();
     });
     var expected = {
         members: {
