@@ -11,7 +11,20 @@ for (var i = 0; i < allMembers.length; i++) {
 }
 */
 
-function modifyData(band) {
+type Band = {
+    members: {
+        current: Member[]
+        past: Member[]
+    }
+}
+
+type Member = {
+    name: string
+    age: number
+    plays: string[]
+}
+
+function modifyData(band: Band) {
     const currentMembers = band.members.current.map((member) => {
         return member.name.toLowerCase()
     })
