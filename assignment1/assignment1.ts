@@ -22,6 +22,15 @@ type Expected = {
     plays: Record<string, string[]>
 }
 
+function findMember(members: Member[], name: string): Member | undefined {
+    for (const member of members) {
+        if (member.name.toLowerCase() === name.toLowerCase()) {
+            return member;
+        }
+    }
+    return undefined;
+  }
+
 function modifyData(band: Band) {
     const currentMembers = band.members.current
     const pastMembers = band.members.past
@@ -29,16 +38,29 @@ function modifyData(band: Band) {
     const plays: Record<string, string[]> = {}
 
     currentMembers.map((member) => {
-        const nameLowercase = member.name.toLowerCase()
-        allMembers.push(nameLowercase)
+        const lowercaseName = member.name.toLowerCase()
+        allMembers.push(lowercaseName)
     })
 
     pastMembers.map((member) => {
-        const nameLowercase = member.name.toLowerCase()
-        allMembers.push(nameLowercase)
+        const lowercaseName = member.name.toLowerCase()
+        allMembers.push(lowercaseName)
     })
 
-    const sortedAllMembers = allMembers.sort()
+    const sortedAllMembers = allMembers
+    .sort((a, b) => {
+        const memberA = findMember(band.members.current.concat(band.members.past), a)
+        const memberB = findMember(band.members.current.concat(band.members.past), b)
+
+        if (memberA && memberB) {
+            if (memberA.age !== memberB.age) {
+                return memberB.age - memberA.age
+            }
+            return a.localeCompare(b)
+        }
+
+        return 0
+    })
 
     const expected: Expected = {
         members: {
