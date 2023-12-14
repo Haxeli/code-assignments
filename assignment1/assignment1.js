@@ -2,17 +2,26 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var data_1 = require("./data");
 function modifyData(band) {
-    var currentMembers = band.members.current.map(function (member) {
-        return ("Name: " + member.name + ", Age: " + member.age + ", Plays: " + member.plays);
+    var currentMembers = band.members.current;
+    var pastMembers = band.members.past;
+    var allMembers = [];
+    var plays = {};
+    currentMembers.map(function (member) {
+        var nameLowercase = member.name.toLowerCase();
+        allMembers.push(nameLowercase);
     });
-    var pastMembers = band.members.past.map(function (member) {
-        return ("Name: " + member.name + ", Age: " + member.age + ", Plays: " + member.plays);
+    pastMembers.map(function (member) {
+        var nameLowercase = member.name.toLowerCase();
+        allMembers.push(nameLowercase);
     });
+    var sortedAllMembers = allMembers.sort();
     var expected = {
         members: {
             current: currentMembers,
-            past: pastMembers
-        }
+            past: pastMembers,
+            all: sortedAllMembers
+        },
+        plays: plays
     };
     return expected;
 }

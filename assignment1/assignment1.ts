@@ -28,11 +28,23 @@ function modifyData(band: Band) {
     const allMembers: string[] = []
     const plays: Record<string, string[]> = {}
 
+    currentMembers.map((member) => {
+        const nameLowercase = member.name.toLowerCase()
+        allMembers.push(nameLowercase)
+    })
+
+    pastMembers.map((member) => {
+        const nameLowercase = member.name.toLowerCase()
+        allMembers.push(nameLowercase)
+    })
+
+    const sortedAllMembers = allMembers.sort()
+
     const expected: Expected = {
         members: {
             current: currentMembers,
             past: pastMembers,
-            all: allMembers
+            all: sortedAllMembers
         },
         plays: plays
     }
