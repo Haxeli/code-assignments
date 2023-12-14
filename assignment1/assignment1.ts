@@ -1,16 +1,5 @@
 import { band } from "./data"
 
-/*
-console.log(band)
-console.log(band.members.current[0])
-console.log(band.members.past[band.members.past.length - 1])
-
-let allMembers = band.members.current.concat(band.members.past)
-for (var i = 0; i < allMembers.length; i++) {
-    console.log(allMembers[i].name.toLowerCase())
-}
-*/
-
 type Band = {
     members: {
         current: Member[]
@@ -24,20 +13,62 @@ type Member = {
     plays: string[]
 }
 
+type Expected = {
+    members: {
+        current: Member[]
+        past: Member[]
+        all: string[]
+    }
+    plays: Record<string, string[]>
+}
+
+function findMember(members: Member[], name: string): Member | undefined {
+    for (const member of members) {
+        if (member.name.toLowerCase() === name.toLowerCase()) {
+            return member;
+        }
+    }
+    return undefined;
+  }
+
 function modifyData(band: Band) {
-    const currentMembers = band.members.current.map((member) => {
-        return("Name: " + member.name + ", Age: " + member.age + ", Plays: " + member.plays)
+    const currentMembers = band.members.current
+    const pastMembers = band.members.past
+    const allMembers: string[] = []
+    const plays: Record<string, string[]> = {}
+
+    currentMembers.map((member) => {
+        const lowercaseName = member.name.toLowerCase()
+        allMembers.push(lowercaseName)
     })
 
-    const pastMembers = band.members.past.map((member) => {
-        return("Name: " + member.name + ", Age: " + member.age + ", Plays: " + member.plays)
+    pastMembers.map((member) => {
+        const lowercaseName = member.name.toLowerCase()
+        allMembers.push(lowercaseName)
     })
 
-    const expected = {
+    const sortedAllMembers = allMembers
+    .sort((a, b) => {
+        const memberA = findMember(band.members.current.concat(band.members.past), a)
+        const memberB = findMember(band.members.current.concat(band.members.past), b)
+
+        if (memberA && memberB) {
+            if (memberA.age !== memberB.age) {
+                return memberB.age - memberA.age
+            }
+            return a.localeCompare(b)
+        }
+
+        return 0
+    })
+
+    const expected: Expected = {
         members: {
             current: currentMembers,
-            past: pastMembers
-        }
+            past: pastMembers,
+            all: sortedAllMembers
+        },
+        plays: plays
     }
 
     return expected;
