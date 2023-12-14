@@ -1,16 +1,5 @@
 import { band } from "./data"
 
-/*
-console.log(band)
-console.log(band.members.current[0])
-console.log(band.members.past[band.members.past.length - 1])
-
-let allMembers = band.members.current.concat(band.members.past)
-for (var i = 0; i < allMembers.length; i++) {
-    console.log(allMembers[i].name.toLowerCase())
-}
-*/
-
 type Band = {
     members: {
         current: Member[]
@@ -24,20 +13,28 @@ type Member = {
     plays: string[]
 }
 
+type Expected = {
+    members: {
+        current: Member[]
+        past: Member[]
+        all: string[]
+    }
+    plays: Record<string, string[]>
+}
+
 function modifyData(band: Band) {
-    const currentMembers = band.members.current.map((member) => {
-        return("Name: " + member.name + ", Age: " + member.age + ", Plays: " + member.plays)
-    })
+    const currentMembers = band.members.current
+    const pastMembers = band.members.past
+    const allMembers: string[] = []
+    const plays: Record<string, string[]> = {}
 
-    const pastMembers = band.members.past.map((member) => {
-        return("Name: " + member.name + ", Age: " + member.age + ", Plays: " + member.plays)
-    })
-
-    const expected = {
+    const expected: Expected = {
         members: {
             current: currentMembers,
-            past: pastMembers
-        }
+            past: pastMembers,
+            all: allMembers
+        },
+        plays: plays
     }
 
     return expected;
