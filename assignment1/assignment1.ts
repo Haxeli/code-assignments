@@ -67,7 +67,7 @@ function modifyData(band: Band) {
             if(!plays[play]) {
                 plays[play] = []
             }
-            plays[play].push(member.name)
+            plays[play].push(member.name.toLowerCase())
         })
     })
 
