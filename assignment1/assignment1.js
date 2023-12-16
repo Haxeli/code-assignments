@@ -40,7 +40,7 @@ function modifyData(band) {
             if (!plays[play]) {
                 plays[play] = [];
             }
-            plays[play].push(member.name);
+            plays[play].push(member.name.toLowerCase());
         });
     });
     var expected = {
