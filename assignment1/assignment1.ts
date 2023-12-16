@@ -62,6 +62,15 @@ function modifyData(band: Band) {
         return 0
     })
 
+    band.members.current.concat(band.members.past).forEach((member) => {
+        member.plays.forEach((play) => {
+            if(!plays[play]) {
+                plays[play] = []
+            }
+            plays[play].push(member.name)
+        })
+    })
+
     const expected: Expected = {
         members: {
             current: currentMembers,

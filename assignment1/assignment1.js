@@ -35,6 +35,14 @@ function modifyData(band) {
         }
         return 0;
     });
+    band.members.current.concat(band.members.past).forEach(function (member) {
+        member.plays.forEach(function (play) {
+            if (!plays[play]) {
+                plays[play] = [];
+            }
+            plays[play].push(member.name);
+        });
+    });
     var expected = {
         members: {
             current: currentMembers,
