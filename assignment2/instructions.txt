@@ -1,0 +1,47 @@
+----------------- ASSIGNMENT 2 - Component Design -------------------------------------------
+
+Design a reusable Angular Dialog component
+
+**Requirement: reusable, flexible**
+
+`Title` area only display "Text" information.
+
+`X` close button can dismiss the Dialog component.
+
+In **Content area** should be able to display any **text, form, different custom components**.
+
+Can close the dialog by **clicking X button** or **any custom button can trigger close event (for example, if you pass a form to the Content, when click `Submit` button should close the Dialog)**.
+
+  ---------------------------
+
+  |                         |
+
+  | <Title>              X  |
+
+  ---------------------------
+
+  |                         |
+
+  |                         |
+
+  | <Content>               |
+
+  |                         |
+
+  |                         |
+
+  |-------------------------|
+
+You can use Angular CLI or [stackblitz]( https://stackblitz.com/) to create an Angular project.
+
+1. Create `Dialog` component folder, all Dialog releated code should be inside this folder.
+
+2. In `app.component.ts`, use `Dialog` component that you created with few example to show how to use your component (don't use any existing implementation such as Angular Material)
+
+3. Styling is **not** important, you don't need to make it looks beautiful, background overlay is not required.
+
+4. We mainly would like to see how you design a reusable component.
+
+5. Basic unit testing cases for `Dialog` Component are **required**.
+
+6. It is **not** necessary to implement ARIA / Keyboard focus, you can skip it and it won't affect the score. Of course, it is a **plus** to show us your knowledge about accessibility.
