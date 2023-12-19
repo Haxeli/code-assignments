@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
     <h1>Hello world!</h1>
     <button (click)="openDialog()">Open dialog</button>
     <app-dialog *ngIf="isDialogOpen" [title]="dialogTitle" (closeDialog)="closeDialog()">
-      <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+      <form #exampleForm="ngForm" (ngSubmit)="onSubmit(exampleForm)">
         <label>
           Name:
           <input type="text" name="name" ngModel>
@@ -25,6 +25,7 @@ import { FormsModule } from '@angular/forms';
         </label>
         <button type="submit">Submit</button>
       </form>
+      <button dialog-actions (click)="closeDialog()">X</button>
     </app-dialog>
   `,
 })
@@ -43,6 +44,10 @@ export class AppComponent {
   }
 
   onSubmit(form: any): void {
+    if (form.value.name == "" || form.value.email == "" || !form.value.email.includes('@')) {
+      alert("Invalid form")
+      return
+    }
     console.log("Name: " + form.value.name + ", Email: " + form.value.email)
   }
 }

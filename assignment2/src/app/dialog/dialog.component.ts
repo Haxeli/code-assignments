@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 })
 export class DialogComponent {
   @Input() title!: string
-  @Input() content!: string
   @Output() closeDialog = new EventEmitter<void>()
 
   onClose():void {
