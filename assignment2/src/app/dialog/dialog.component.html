@@ -2,8 +2,6 @@
     <div class="dialog-title">
         <h1>{{title}}</h1>
     </div>
-    <div class="dialog-content">
-        <p>{{content}}</p>
-    </div>
+    <ng-content></ng-content>
     <button (click)="onClose()" >X</button>
 </div>
