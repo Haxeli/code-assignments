@@ -16,8 +16,7 @@ import { FormsModule } from '@angular/forms';
     <app-dialog *ngIf="isDialogOpen" [title]="dialogTitle" (closeDialog)="closeDialog()">
       <form #exampleForm="ngForm" (ngSubmit)="onSubmit(exampleForm)">
         <label>
-          Name:
-          <input type="text" name="name" ngModel>
+          Subscribe to our newsletter! <br />
         </label>
         <label>
           Email:
@@ -44,10 +43,11 @@ export class AppComponent {
   }
 
   onSubmit(form: any): void {
-    if (form.value.name == "" || form.value.email == "" || !form.value.email.includes('@')) {
+    if (form.value.email == "" || !form.value.email.includes('@')) {
       alert("Invalid form")
       return
     }
-    console.log("Name: " + form.value.name + ", Email: " + form.value.email)
+    alert("Email: " + form.value.email + "\nThank you for subscribing!")
+    this.closeDialog()
   }
 }
