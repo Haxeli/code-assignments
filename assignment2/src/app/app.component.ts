@@ -24,7 +24,7 @@ import { FormsModule } from '@angular/forms';
         </label>
         <button type="submit">Submit</button>
       </form>
-      <button dialog-actions (click)="closeDialog()">X</button>
+      <button dialog-button (click)="closeDialog()">X</button>
     </app-dialog>
   `,
 })
