@@ -2,18 +2,19 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { DialogComponent } from './dialog/dialog.component';
+import { DialogTitleComponent } from './dialog-title/dialog-title.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, DialogComponent, FormsModule],
-  //templateUrl: './app.component.html',
+  imports: [CommonModule, RouterOutlet, DialogComponent, DialogTitleComponent, FormsModule],
   styleUrl: './app.component.css',
   template: `
     <h1>Reusable Dialog Component</h1>
     <button (click)="openDialog()">Open dialog</button>
-    <app-dialog dialog-title *ngIf="isDialogOpen" (closeDialog)="closeDialog()">
+    <app-dialog *ngIf="isDialogOpen" (closeDialog)="closeDialog()">
+      <app-dialog-title dialog-title [title]="'Subscribe'"></app-dialog-title>
       <form dialog-content #exampleForm="ngForm" (ngSubmit)="onSubmit(exampleForm)">
         <label>
           Subscribe to our newsletter! <br />
