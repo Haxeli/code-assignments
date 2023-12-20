@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { DialogComponent } from './dialog/dialog.component';
@@ -13,8 +13,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './app.component.css',
   template: `
     <h1>Reusable Dialog Component</h1>
-    <button (click)="openDialog()">Open dialog</button>
-    <app-dialog *ngIf="isDialogOpen" (closeDialog)="closeDialog()">
+    <!-- <button (click)="openDialog()">Open dialog</button> -->
+    <app-dialog *ngIf="dialogs['form']" (closeDialog)="closeDialog('form')">
       <app-dialog-title dialog-title [title]="'Subscribe'"></app-dialog-title>
       <form dialog-content #exampleForm="ngForm" (ngSubmit)="onSubmit(exampleForm)">
         <label>
@@ -24,32 +24,66 @@ import { FormsModule } from '@angular/forms';
           Email:
           <input type="email" name="email" ngModel>
         </label>
-        <!-- For forms, the dialog button needs to be declared inside the form component -->
         <app-dialog-button dialog-button type="submit" >Submit</app-dialog-button>
       </form>
     </app-dialog>
+    <app-dialog *ngIf="dialogs['delete']" (closeDialog)="closeDialog('delete')">
+      <app-dialog-title dialog-title [title]="'Confirm Action'"></app-dialog-title>
+      <p dialog-content>Are you sure you want to delete your account?</p>
+      <img dialog-content src="https://media.giphy.com/media/3o7aDcz6Y0fzWYvwrq/giphy.gif" alt="A gif that informs of the media's unavailability" width="200px" height="100px"/>
+      <app-dialog-button dialog-button (click)="confirmDelete()">Confirm</app-dialog-button>
+      <app-dialog-button dialog-button (click)="closeDialog('delete')">Cancel</app-dialog-button>
+    </app-dialog>
+    <app-dialog *ngIf="dialogs['cookie']" (closeDialog)="closeDialog('cookie')">
+      <app-dialog-title dialog-title [title]="'Cookies'"></app-dialog-title>
+      <p dialog-content>This website uses cookies to improve your experience.</p>
+      <app-dialog-button dialog-button (click)="onAccept()">Accept</app-dialog-button>
+      <app-dialog-button dialog-button (click)="closeDialog('cookie')">Decline</app-dialog-button>
+    </app-dialog>
   `,
+  //Above are examples of the dialog component's usage. Note that a form requires the dialog-button to be declared inside the form tag.
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'assignment2'
-  isDialogOpen: boolean = false
-
-  openDialog(): void {
-    this.isDialogOpen = true
+  dialogs: {[key:string]: boolean} = {
+    form: false,
+    delete: false,
+    cookie: false
   }
 
-  closeDialog(): void {
-    console.log("closeDialog")
-    this.isDialogOpen = false
+  ngOnInit(): void {
+    Object.keys(this.dialogs).forEach(dialogName => {
+      this.openDialog(dialogName)
+    })
+  }
+
+  openDialog(dialogName: string): void {
+    this.dialogs[dialogName] = true
+  }
+
+  closeDialog(dialogName: string): void {
+    console.log(`closeDialog: ${dialogName}`)
+    this.dialogs[dialogName] = false
   }
 
   onSubmit(form: any): void {
-    console.log("onSubmit")
     if (form.value.email == "" || !form.value.email.includes('@')) {
-      alert("Invalid form")
+      alert("Invalid form (requires the @ sign)")
       return
     }
     alert("Email: " + form.value.email + "\nThank you for subscribing!")
-    this.closeDialog()
+    this.closeDialog('form')
+  }
+
+  confirmDelete(): void {
+    console.log("confirmDelete")
+    alert("Account deleted!")
+    this.closeDialog('delete')
+  }
+
+  onAccept(): void {
+    console.log("onAccept")
+    alert("Cookies accepted!")
+    this.closeDialog('cookie')
   }
 }
