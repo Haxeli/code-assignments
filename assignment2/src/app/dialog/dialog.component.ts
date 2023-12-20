@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,9 +9,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent {
-  @Output() closeDialog = new EventEmitter<void>()
+  @Input() isOpen: boolean = false
+  @Output() close = new EventEmitter<void>()
 
-  onClose():void {
-    this.closeDialog.emit()
+  closeDialog():void {
+    this.close.emit()
   }
 }
