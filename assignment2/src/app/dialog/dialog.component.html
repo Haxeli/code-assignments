@@ -1,7 +1,5 @@
 <div class="dialog-container">
-    <div class="dialog-title">
-        <h1>{{title}}</h1>
-    </div>
-    <ng-content></ng-content>
-    <ng-content select="[dialog-button]" ></ng-content>
+    <div class="dialog-title"><ng-content select="[dialog-title]"></ng-content></div>
+    <div class="dialog-content"><ng-content select="[dialog-content]"></ng-content></div>
+    <div class="dialog-button"><ng-content select="[dialog-button]" ></ng-content></div>
 </div>

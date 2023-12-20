@@ -11,10 +11,10 @@ import { FormsModule } from '@angular/forms';
   //templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   template: `
-    <h1>Hello world!</h1>
+    <h1>Reusable Dialog Component</h1>
     <button (click)="openDialog()">Open dialog</button>
-    <app-dialog *ngIf="isDialogOpen" [title]="dialogTitle" (closeDialog)="closeDialog()">
-      <form #exampleForm="ngForm" (ngSubmit)="onSubmit(exampleForm)">
+    <app-dialog dialog-title *ngIf="isDialogOpen" (closeDialog)="closeDialog()">
+      <form dialog-content #exampleForm="ngForm" (ngSubmit)="onSubmit(exampleForm)">
         <label>
           Subscribe to our newsletter! <br />
         </label>
@@ -29,9 +29,7 @@ import { FormsModule } from '@angular/forms';
   `,
 })
 export class AppComponent {
-  title = 'assignment2';
-  dialogTitle: string = 'Re-usable dialog'
-  dialogContent: string = 'Content'
+  title = 'assignment2'
   isDialogOpen: boolean = false
 
   openDialog(): void {
