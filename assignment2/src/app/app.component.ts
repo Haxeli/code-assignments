@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
         </label>
         <app-dialog-button dialog-button type="submit" >Submit</app-dialog-button>
       </form>
+      <app-dialog-button dialog-button (click)="closeDialog('form')">X</app-dialog-button>
     </app-dialog>
     <app-dialog *ngIf="dialogs['delete']" [isOpen]="dialogs['delete']" (close)="closeDialog('delete')">
       <app-dialog-title dialog-title [title]="'Confirm Action'"></app-dialog-title>
@@ -41,8 +42,7 @@ import { FormsModule } from '@angular/forms';
       <app-dialog-button dialog-button (click)="closeDialog('cookie')">Decline</app-dialog-button>
     </app-dialog>
   `,
-  //Above are examples of the dialog component's usage. Note that a form requires the dialog-button to be declared inside the form tag.
-  //Worth noting is also that the dialog component is not a standalone component, but rather a wrapper for the dialog-title and dialog-button.
+  //Above are 3 examples of the dialog component's usage. Note that a form requires another dialog-button to be declared inside the form tag to handle the submission.
 })
 export class AppComponent {
   title = 'assignment2'
