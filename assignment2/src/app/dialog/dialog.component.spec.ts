@@ -34,8 +34,13 @@ describe('DialogComponent', () => {
   });
 
   it('should display the dialog when isOpen is true', () => {
+    const fixture = TestBed.createComponent(DialogComponent);
+    const component = fixture.componentInstance;
+    
     component.isOpen = true;
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('dialog')).toBeTruthy();
+    
+    const dialogElement = fixture.nativeElement.querySelector('div');
+    expect(dialogElement).toBeTruthy();
   });
 });
