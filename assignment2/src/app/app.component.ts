@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogTitleComponent } from './dialog-title/dialog-title.component';
+import { DialogButtonComponent } from './dialog-button/dialog-button.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, DialogComponent, DialogTitleComponent, FormsModule],
+  imports: [CommonModule, RouterOutlet, DialogComponent, DialogTitleComponent, DialogButtonComponent, FormsModule],
   styleUrl: './app.component.css',
   template: `
     <h1>Reusable Dialog Component</h1>
@@ -23,9 +24,9 @@ import { FormsModule } from '@angular/forms';
           Email:
           <input type="email" name="email" ngModel>
         </label>
-        <button type="submit">Submit</button>
+        <!-- For forms, the dialog button needs to be declared inside the form component -->
+        <app-dialog-button dialog-button type="submit" >Submit</app-dialog-button>
       </form>
-      <button dialog-button (click)="closeDialog()">X</button>
     </app-dialog>
   `,
 })
@@ -38,10 +39,12 @@ export class AppComponent {
   }
 
   closeDialog(): void {
+    console.log("closeDialog")
     this.isDialogOpen = false
   }
 
   onSubmit(form: any): void {
+    console.log("onSubmit")
     if (form.value.email == "" || !form.value.email.includes('@')) {
       alert("Invalid form")
       return
