@@ -20,4 +20,27 @@ describe('DialogComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit close event when closeDialog is called', () => {
+    spyOn(component.close, 'emit');
+    component.closeDialog();
+    expect(component.close.emit).toHaveBeenCalled();
+  });
+
+  it('should not display the dialog when isOpen is false', () => {
+    component.isOpen = false;
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('dialog')).toBeFalsy();
+  });
+
+  it('should display the dialog when isOpen is true', () => {
+    const fixture = TestBed.createComponent(DialogComponent);
+    const component = fixture.componentInstance;
+    
+    component.isOpen = true;
+    fixture.detectChanges();
+    
+    const dialogElement = fixture.nativeElement.querySelector('div');
+    expect(dialogElement).toBeTruthy();
+  });
 });
