@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dialog',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './dialog.component.html',
-  styleUrl: './dialog.component.css'
+  styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent {
+  @Output() closeDialog = new EventEmitter<void>()
 
+  onClose():void {
+    this.closeDialog.emit()
+  }
 }
